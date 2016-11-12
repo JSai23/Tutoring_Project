@@ -23,7 +23,7 @@
 <form action="studentSearch.php" method="post">
     <table>
       <th>Search</th>
-      <tr><td>Date:</td><td> <input name="date" type="text"></td></tr>
+      <tr><td>Date:</td><td> <input name="Date" type="text"></td></tr>
       <tr><td>Last Name:</td><td> <input name="LName" type="text"></td></tr>
       <tr><td>First Name: </td><td><input name="FName" type="text"></td></tr>
       <tr><td>Email:</td><td> <input name="Email" type="text"></td></tr>
