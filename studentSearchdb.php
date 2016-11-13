@@ -11,14 +11,54 @@
     {
         die("Connection Failed");
     }
-    $S = "SELECT * FROM sinfo
-      WHERE" ;
-    if(!empty("$_POST[Date]") && ($S == "SELECT * FROM sinfo
-      WHERE")
+    if(empty($_POST))
     {
-    $S .= "";
+    echo "Fill out Form";
     }
-     $result = mysqli_query($conn, $S);
+    else {
+    $S = "SELECT * FROM sinfo WHERE";
+    if(!empty("$_POST[Date]") && ($S == "SELECT * FROM sinfo WHERE"))
+    {
+      $S .= " TUTORING_DAY LIKE {$_POST['Date']}";
+    }
+    elseif(!empty("$_POST[Date]"))
+    {
+      $S .= " AND TUTORING_DAY LIKE {$_POST['Date']}";
+    }
+    if(!empty("$_POST[LName]") && ($S == "SELECT * FROM sinfo WHERE"))
+      {
+        $S .= " LAST_NAME LIKE '%{$_POST['LName']}%'";
+      }
+    elseif(!empty("$_POST[LName]"))
+    {
+      $S .= " AND LAST_NAME LIKE '%{$_POST['LName']}%'";
+    }
+    if(!empty("$_POST[FName]") && ($S == "SELECT * FROM sinfo WHERE"))
+      {
+        $S .= " FIRST_NAME LIKE '%{$_POST['FName']}%'";
+      }
+    elseif(!empty("$_POST[FName]"))
+    {
+      $S .= " AND FIRST_NAME LIKE '%{$_POST['FName']}%'";
+    }
+    if(!empty("$_POST[Email]") && ($S == "SELECT * FROM sinfo WHERE"))
+      {
+        $S .= " EMAIL LIKE '%{$_POST['Email']}%'";
+      }
+    elseif(!empty("$_POST[Email]"))
+    {
+      $S .= " AND EMAIL LIKE '%{$_POST['Email']}%'";
+    }
+    else {
+      echo "";
+    }
+    if($S == "SELECT * FROM sinfo WHERE")
+    {
+      echo "no input";
+    }
+    else{
+    echo $S;
+    $result = mysqli_query($conn, $S);
     echo "<table>
     <tr>
     <th>#</th>
@@ -31,9 +71,8 @@
     <th>Message</th>
     <th>Tutoring Day</th>
     </tr>";
-  if(!empty($_POST['search']))
+    while ($record = mysqli_fetch_array($result))
     {
-    while ($record = mysqli_fetch_array($result)){
       echo "<tr>
       <td>{$record['NUM']}</td>
       <td>{$record['TODAY_DATE']}</td>
@@ -44,6 +83,8 @@
       <td>{$record['SUBJECT']}</td>
       <td>{$record['MESSAGE']}</td>
       <td>{$record['TUTORING_DAY']}</td>
-      </tr>";};
+      </tr>";}
     }
+  }
+
  ?>
