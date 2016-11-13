@@ -11,20 +11,14 @@
     {
         die("Connection Failed");
     }
-    if(!empty("$_POST[search]"))
-    {
-    $search = "$_POST[search]";
     $S = "SELECT * FROM sinfo
-      WHERE NUM LIKE '%$search%' OR
-      LAST_NAME LIKE '%$search%' OR
-      FIRST_NAME LIKE '%$search%' OR
-      EMAIL LIKE '%$search%' OR
-      STUDENT_ID LIKE '%$search%' OR
-      SUBJECT LIKE '%$search%' OR
-      MESSAGE LIKE '%$search%' OR
-      TUTORING_DAY LIKE '%$search%'";
-    $result = mysqli_query($conn, $S);
-     }
+      WHERE" ;
+    if(!empty("$_POST[Date]") && ($S == "SELECT * FROM sinfo
+      WHERE")
+    {
+    $S .= "";
+    }
+     $result = mysqli_query($conn, $S);
     echo "<table>
     <tr>
     <th>#</th>
