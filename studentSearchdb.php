@@ -56,8 +56,8 @@
     {
       echo "no input";
     }
-    else{
-    echo $S;
+    else
+    {
     $result = mysqli_query($conn, $S);
     echo "<table>
     <tr>
